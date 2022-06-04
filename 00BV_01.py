@@ -1,23 +1,21 @@
-"""This program adds on to 2_product_information_04 and adds the product, unit
-and price to a list called information_list. I also rounded the price and unit
-23/05/2022
-Abigael Ward
-"""
+"""Components 1_User_Budget_03.py and 2_Product_Information_04"""
 
-
+# Functions:
 def float_checker(question):
     error = "\nSorry, that is not a valid choice\n"  # if its not a integer
     while True:
         try:
-            element = float(input(question))
-            return element
+            floater = float(input(question))
+            return floater
         except ValueError:
-            print(error)  # prints error message here
+            print(error)
 
 
 # lists
 information_list = []
+
 # main routine
+budget = float_checker("What is the maximum amount you want to spend? ")
 while True:
     product = input("Please enter the product name or press x to leave: ")
     if product != "x":

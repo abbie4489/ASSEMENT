@@ -6,8 +6,8 @@ Abigael Ward
 def float_checker(question, error):
     while True:
         try:
-            string = float(input(question))
-            return round(string, 2)
+            floats = float(input(question))
+            return round(floats, 2)
         except ValueError:
             print(error)
 
