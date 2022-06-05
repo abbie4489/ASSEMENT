@@ -1,17 +1,7 @@
-# Integer checking function - loops until a valid number is entered
+f = open("demofile2.txt", "a")
+f.write("Now the file has more content!")
+f.close()
 
-def integer_checker(question):
-    error = "\nSorry, you must enter an integer\n"
-    type = float()
-    while not type:
-        try:
-            type = float(input(question))
-            return type
-        except ValueError:
-            print(error)
-
-
-# Main routine
-age = integer_checker("Please enter your age: ")
-print(f"Age = {age}")
-
+#open and read the file after the appending:
+f = open("demofile2.txt", "r")
+print(f.read())

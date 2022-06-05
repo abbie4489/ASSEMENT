@@ -1,10 +1,17 @@
-"""Average unit price
+"""this program works out the average unit price
+Abiagel
 """
 
+# Variables
 number = 0
 total_price = 0
 calc = float()
-test_list = [["coffee", "200", "7"], ["Moccona", "90", "10"], ["Nescafe", "180", "7.79"]]
+
+# Lists
+test_list = [["Greggs", 200.0, 7.0], ["Moccona", 90.0, 10.49],
+             ["Nescafe", 180.0, 7.79]]
+
+# Main Routine
 for index in range(len(test_list)):
     number += 1
     price_numbers = float(test_list[index][2])

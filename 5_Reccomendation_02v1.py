@@ -1,9 +1,10 @@
 """Identifying the price that is the lowest below the budget make the
-recommendation. make it into a function. need error message to say if the
-budget is below any of the other prices
+recommendation. version 1
 """
 
 
+# Functions
+# function that ends when appropriate answer is entered
 def float_checker(question):
     floats = float()
     while not floats:
@@ -14,6 +15,7 @@ def float_checker(question):
             print("please enter a float")
 
 
+# Function that finds the best value and most affordable
 def best_value(test_list):
     affordable = [item for item in test_list if item[2] <= budget]
     max_affordable = []
@@ -28,13 +30,18 @@ def best_value(test_list):
     return max_affordable
 
 
-test_list = [["coffee", 200.0, 70.0], ["Moccona", 90.0, 10.0],
-             ["Nescafe", 180.0, 7.79]]
+# Lists
+test_list = [["Greggs", 200.0, 7.0, 0.04], ["Moccona", 90.0, 10.49, 0.12],
+             ["Nescafe", 180.0, 7.79, 0.04]]
 
+# Loop
 a = []
 while a == []:
     cheapest_item = min(test_list, key=lambda x: x[2])
     print(f"The lowest price is ${cheapest_item[2]}")
-    budget = float_checker("what is your budget? (please enter above the lowest price): ")
+    budget = float_checker("what is your budget? (please enter above "
+                           "the lowest price): ")
     a = best_value(test_list)
+
+# recommendation
 print(f"The next item below your budget is {a}")

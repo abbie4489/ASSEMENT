@@ -1,6 +1,7 @@
 """Components 1_User_Budget_03.py and 2_Product_Information_04"""
 
 # Functions:
+# Make sure that it is a float and if not then it repeats the question
 def float_checker(question):
     error = "\nSorry, that is not a valid choice\n"  # if its not a integer
     while True:
