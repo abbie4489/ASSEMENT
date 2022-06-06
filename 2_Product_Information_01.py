@@ -1,5 +1,6 @@
 """ This program focuses on when X entered the loop will stop
-Abigael
+Made by Abigael Ward
+23/5/2022
 """
 # main routine
 product = ""  # product is a string

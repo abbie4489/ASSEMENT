@@ -1,12 +1,13 @@
 """this program works out the the cheapest item
-Abigael
+Made by Abigael
+27/05/2022
 """
 
 # Variables
 total_value = float()
 total_price = float()
-cheapest_item, cheapest_value = float(), float()
-expensive_item, expensive_item_value = float(), float()
+cheapest_item = float()
+expensive_item = float()
 
 # Lists
 test_list = [["Greggs", 200.0, 7.0], ["Moccona", 90.0, 10.49],

@@ -1,6 +1,7 @@
 """"User_budget_02 - this program is based on User_budget_01 but simplifies the
 error message - version 1
-Abigael Ward
+Made by Abigael Ward
+22/5/2022
 """
 
 

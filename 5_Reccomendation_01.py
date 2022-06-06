@@ -1,4 +1,8 @@
-"""Identifying the price that is the lowest below the budget"""
+"""Identifying the price that is the lowest below the budget
+Made by Abigael
+27/05/2022
+"""
+
 
 # Lists
 test_list = [["coffee", 200.0, 70.0], ["Moccona", 90.0, 10.0],

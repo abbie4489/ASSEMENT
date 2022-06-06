@@ -1,4 +1,6 @@
 """This component needs to display a clear introduction
+Made by Abigael
+2/06/2022
 """
 
 print("### Welcome to Best Value ###\n")

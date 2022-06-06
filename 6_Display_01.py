@@ -1,4 +1,6 @@
 """This program uses panda to display the information
+Made by Abigael
+28/05/2022
 """
 
 # import the library

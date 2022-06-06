@@ -1,6 +1,7 @@
 """"User_budget_01 this program asks the maximum amount that the user wants to
 spend and has a function that checks if the input is a integer
-Abigael Ward
+Made by Abigael Ward
+22/5/2022
 """
 
 

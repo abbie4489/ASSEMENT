@@ -1,5 +1,6 @@
 """ This program uses a while True loop and doesnt print x
-Abigael
+Made by Abigael Ward
+23/5/2022
 """
 # main routine
 while True:

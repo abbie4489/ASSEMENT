@@ -1,5 +1,6 @@
 """this program works out the average unit price
-Abiagel
+Made by Abigael
+25/05/2022
 """
 
 # Variables

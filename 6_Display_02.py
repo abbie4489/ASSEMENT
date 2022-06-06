@@ -1,4 +1,6 @@
 """This program renames the headers to appropriate names
+Made by Abigael
+28/05/2022
 """
 
 # import the library

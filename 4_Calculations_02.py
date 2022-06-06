@@ -1,5 +1,6 @@
 """this program works out the most expensive item per unit
-Abigael
+Made by Abigael
+27/05/2022
 """
 
 # Variables

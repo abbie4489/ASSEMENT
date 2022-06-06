@@ -1,34 +1,84 @@
 """Adding component 6_Display_03
+made by Abigael
+6/06/2022
 """
 
 # import the library
 import pandas as pd
+import csv
 
 
 # Functions:
-def float_checker(question):
+def get_number(num):
+    valid_num = True
+    if num < 0:
+        valid_num = False
+    return valid_num
+
+
+# Checks if the input is a float if not theirs error
+def get_float(question):
     error = "\nSorry, that is not a valid choice\n"  # if its not a integer
     while True:
         try:
-            floater = float(input(question))
-            return floater
+            element = float(input(question))  # re asks the question
+            return element
         except ValueError:
-            print(error)
+            print(error)     # prints error message here
 
 
-def get_choice(choice):
-    valid_choices = [["g", "gram", "grams"], ["l", "litre", "litres"],
-                     ["ml", "milliliters", "milliliter"],
-                     ["kg", "kilogram", "kilograms"]]
-    choice_error = "Sorry that is not a valid choice "
+# splits the mass onto two variables
+def get_choice(mass):
+    # list
+    valid_choices = [["G", "Gram", "Grams"], ["Kg", "Kilogram", "Kilograms"],
+                     ["L", "Litre", "Litres"],
+                     ["Ml", "Milliliters", "Milliliter"]]
+    choice_error = "Please enter in the format of amount and unit eg. 10g"
     result = False
-    choice = input("What unit would you like to use? ")
+    mass = input("Please enter the mass/volume of the product: ")
+    split = 0
+    # Splitting the number and string
+    for i in range(0, len(mass)):
+        if mass[i].isdigit():
+            split = i
+    number = mass[:split + 1]
+    unit = mass[split + 1:].capitalize()
+
+    # Loop to get appropriate answer for mass
+    is_error = False
+    try:
+        number = float(number)
+    except ValueError:
+        is_error = True
+    else:
+        if not get_number(number):
+            is_error = True
+
+    if not number or not unit:
+        is_error = True
+
+
+
+    correct_unit_price = 0
     for list_item in valid_choices:
-        for unit in list_item:
-            if unit == choice:
-                result = choice
+        for unit_label in list_item:
+            if unit_label == unit:
+                if unit in valid_choices[0]:
+                    correct_unit_price = number, "Grams"
+                elif unit in valid_choices[1]:
+                    correct_unit_price = number * 1000, "Grams"
+                elif unit in valid_choices[3]:
+                    correct_unit_price = number / 1000, "Litres"
+                elif unit in valid_choices[2]:
+                    correct_unit_price = number, "Litres"
+                result = correct_unit_price
+
+    if is_error:
+        result = False
     if not result:
         print(choice_error)
+
+    print(number)
     return result
 
 
@@ -50,6 +100,7 @@ def get_budget():
     return budget
 
 
+# returns the most affordable item
 def best_value(information_list, budget):
     affordable = [item for item in information_list if item[2] <= budget]
     max_affordable = []
@@ -64,77 +115,92 @@ def best_value(information_list, budget):
     return max_affordable
 
 
+# lists
+
+information_list = []
+valid_choices = [["g", "gram", "grams"], ["kg", "kilogram", "kilograms"],
+                 ["l", "litre", "litres"],
+                 ["ml", "milliliters", "milliliter"]]
+
+# Variables
+total_value = float()
+total_price = float()
+cheapest_item, cheapest_value = float(), float()
+expensive_item, expensive_item_value = float(), float()
+
 should_continue = True
 while should_continue:
     print("### Welcome to Best Value ###\n")
-    print("This program will take the product name, weight \nprice to recommend "
-          "what product you should buy")
+    print("This program will take the product name, weight \nprice to "
+          "recommend what product you should buy")
     print("--The unit is the weight unit e.g. kg, g, ml, l \n")
-    # lists
-    information_list = []
-
-    # Variables
-    total_value = float()
-    total_price = float()
-    cheapest_item, cheapest_value = float(), float()
-    expensive_item, expensive_item_value = float(), float()
 
     # main routine
-    choice = False
-    while not choice:
-        choice = get_choice(choice)
-    print("the unit you are using is", choice)
-
     while True:
-        product = input("\nPlease enter the product name or press x to leave: ")
+        product = input("Please enter the product name or press x to leave: ")
         if product != "x":
-            unit = float_checker("Please enter the mass/volume of the product: ")
-            price = float_checker("Please enter the price of the product: ")
-            information = [product, float("%.2f" % unit), float("%.2f" % price)]
-            information_list.append(information)
+            mass = False
+            while not mass:
+                mass = get_choice(mass)
+            number, unit = mass
+            valid_num = False
+            while not valid_num:
+                price = get_float("Please enter the price of the product: ")
+                valid_num = get_number(price)
+                # Rounds the mass and price to 2 decimal places
+                information = [product, float("%.2f" % number), float("%.2f" % price)]
+                information_list.append(information)  # adding to the list
+
         elif product == "x":
-            print("\n----------------------------")
-            print("You have left the program")
-            print("----------------------------\n")
+            print("\n###Results###")
             break  # stops the while loop
 
     # Sorts the list by price
     information_list = sorted(information_list, key=lambda x: x[2])
 
     for index in range(0, len(information_list)):
-        value = round(float((information_list[index][2]) / (information_list[index][1])), 2)
+        value = round(float((information_list[index][2]) /
+                      (information_list[index][1])), 2)
         total_price += float(information_list[index][2])
-        total_value += round(float(information_list[index][2]) / float(information_list[index][1]), 2)
+        total_value += round(float(information_list[index][2]) /
+                             float(information_list[index][1]), 2)
         information_list[index].append(value)
         cheapest_item = information_list[0]
         expensive_item = information_list[-1]
 
     # Print Statements
-    print(f"Average unit price: ${round(total_value / len(information_list), 2)}\nCheapest "
-          f"item: {cheapest_item[0]}\nMost expensive item: {expensive_item[0]}")
+    print(f"Average unit price: "
+          f"${round(total_value / len(information_list), 2)}\nCheapest item: "
+          f"{cheapest_item[0]}\nMost expensive item: {expensive_item[0]}")
     print("__________________________________")
     budget = get_budget()
     value = best_value(information_list, budget)
     # Recommendation
     print("------------------------------------------------------------------")
-    print("The item with the best value for you is", '{}, {}, {}'.format(value[0],
-                                                                         value[1],
-                                                                         value[2]))
+    print("The item with the best value for you is",
+          '{}, {}, {}'.format(value[0], value[1], value[2]))
     print("------------------------------------------------------------------")
     print("\n\n")
     # sorting the original list
     information_list.sort(key=lambda row: (row[3]))
 
     # new list with headers and pandas format
-    displayed_list = pd.DataFrame({'Name': [item[0] for item in information_list],
-                                   'Weight': [item[1] for item in information_list],
-                                   'Price$': [item[2] for item in information_list],
-                                   'Value$': [item[3] for item in information_list]})
+    displayed_list = pd.DataFrame(
+        {'Name': [item[0] for item in information_list],
+         'Weight': [item[1] for item in information_list],
+         'Price$': [item[2] for item in information_list],
+         'Value$': [item[3] for item in information_list]})
 
     displayed_list.to_csv("ticket_details.csv")
 
     # print statements
     print(displayed_list)
+
+    # excel sheet
+    with open('Best_Value.csv', 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(["Name", "Weight", "Price", 'Value'])
+        writer.writerows(information_list)
 
     exit = input("\npress enter to exit and anything else to continue")
     if exit == "":
